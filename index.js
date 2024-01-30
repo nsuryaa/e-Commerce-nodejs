@@ -17,9 +17,14 @@ app.get("/", (req, res) => {
 });
 
 app.get("/about", (req, res) => {
-  res.send("about");
+  res.render("about");
 });
 
+app.get("/api", (req, res) => {
+  res.json({
+    name: "Surya",
+  });
+});
 // default port:8080
 
 //app will listen
