@@ -13,11 +13,48 @@ app.use(express.static("public"));
 app.set("view engine", "ejs");
 //get consist of two paramaters
 app.get("/", (req, res) => {
-  res.render("home");
+  res.render("home", {
+    title: "Home",
+  });
 });
 
 app.get("/about", (req, res) => {
-  res.render("about");
+  res.render("about", {
+    title: "About us",
+  });
+});
+
+app.get("/shop", (req, res) => {
+  res.render("shop", {
+    title: "Shop here",
+  });
+});
+
+app.get("/product/:id", (req, res) => {
+  console.log(req.params.id);
+  var data = [
+    {
+      id: 1,
+      productName: "Shirt",
+    },
+    {
+      id: 2,
+      productName: "Pant",
+    },
+  ];
+  var result;
+
+  data.forEach((product) => {
+    if (product.id == req.params.id) {
+      result = product;
+      return true;
+    }
+  });
+  res.render("product.ejs", {
+    title: "Product Details",
+    product: result,
+  });
+  console.log(result);
 });
 
 app.get("/api", (req, res) => {
